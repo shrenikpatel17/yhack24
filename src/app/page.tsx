@@ -5,6 +5,10 @@ import OpenAI from 'openai';
 import React from 'react';
 import { Globe } from 'lucide-react';
 import sustainllmicon from '../app/image/sustainllmicon.png'
+import bottle from '../app/image/bottle.png'
+import electricity from '../app/image/electricity.png'
+import co2 from '../app/image/co2.png'
+import phone from '../app/image/phone.png'
 import Image from 'next/image';
 
 const openaiApiKey = "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"
@@ -89,6 +93,52 @@ export default function Home() {
     } finally {
       setIsLoading(false);
     }
+    function calcBottle(characterCount: number): string {
+      // Calculate the amount of water used in mL
+      const mlPerCharacter: number = 100 / 150; // 100 mL for 150 characters
+      const totalML: number = characterCount * mlPerCharacter;
+  
+      // Convert to liters if totalML exceeds 1000 mL
+      if (totalML >= 1000) {
+          const totalLiters: number = totalML / 1000;
+          return `${totalLiters.toFixed(2)} L Saved`;
+      }
+      return `${totalML.toFixed(2)} mL Saved`;
+  }  
+
+  function calcElectricity(characterCount: number): string {
+    const wattsPerCharacter: number = 2.9 / 150; // 2.9 watts for 150 characters
+    const totalWatts: number = characterCount * wattsPerCharacter;
+
+    // Convert to kilowatts if total exceeds 1000 watts
+    if (totalWatts > 1000) {
+        const totalKilowatts = totalWatts / 1000;
+        return `${totalKilowatts.toFixed(2)} kW Saved`;
+    }
+
+    return `${totalWatts.toFixed(2)} Watts Saved`;
+}
+
+  function calculateCO2Usage(characterCount: number): string {
+    const gramsPerCharacter: number = 2.5 / 150; // 2.5 grams for 150 characters
+    const totalGrams: number = characterCount * gramsPerCharacter;
+
+    // Convert to kilograms if total exceeds 1000 grams
+    if (totalGrams > 1000) {
+        const totalKilograms = totalGrams / 1000;
+        return `${totalKilograms.toFixed(2)} Kg Saved`;
+    }
+
+    return `${totalGrams.toFixed(2)} Grams Saved`;
+}
+
+  function calcPhonesCharged(characterCount: number): string {
+    const phonesChargedPerCharacter: number = 0.25 / 150; // 0.25 phones charged for 150 characters
+    const totalPhonesCharged: number = characterCount * phonesChargedPerCharacter;
+
+    return `${totalPhonesCharged.toFixed(4)} phones charged`;
+  }
+    
   };
 
   return (
@@ -231,16 +281,79 @@ at Yale
   </div>
   
   <div className="bg-gradient-to-b from-grad-light to-grad-dark rounded-2xl p-4">
-    <h2 className="text-text-green text-sm font-MonoReg">Sustainability Metrics</h2>
-    {/* Metrics content */}
-    <div className="bg-white mt-2 from-grad-light via-grad-light to-grad-dark rounded-2xl p-4 h-16"></div>
-  </div>
+      <h2 className="text-text-green text-sm font-MonoReg">Sustainability Metrics</h2>
+      <div className="bg-white mt-2 rounded-2xl p-4 flex justify-between items-center">
+        <div className="flex items-center">
+        <Image src={bottle} alt="Bottle" width={24} height={24} className="mr-2" />
+        <div>
+            <div className="text-text-green text-xs font-MonoReg font-bold">0.9</div>
+            <div className="text-text-green text-xs font-MonoReg">bottles saved</div>
+          </div>
+        </div>
+        
+        <div className="flex items-center">
+        <Image src={electricity} alt="Electricity" width={24} height={24} className="mr-2" />
+          <div>
+            <div className="text-text-green text-xs font-bold font-MonoReg">12</div>
+            <div className="text-text-green text-xs font-MonoReg">kWH saved</div>
+          </div>
+        </div>
+        
+        <div className="flex items-center">
+        <Image src={co2} alt="Co2" width={30} height={30} className="mr-2" />
+          <div>
+            <div className="text-text-green text-xs font-bold font-MonoReg">1-5</div>
+            <div className="text-text-green text-xs font-MonoReg">grams</div>
+          </div>
+        </div>
+        
+        <div className="flex items-center">
+        <Image src={phone} alt="Phone" width={22} height={22} className="mr-2" />
+          <div>
+            <div className="text-text-green text-xs font-bold font-MonoReg">1.5</div>
+            <div className="text-text-green text-xs font-MonoReg">phones charged</div>
+          </div>
+        </div>
+      </div>
+    </div>
   
   <div className="bg-gradient-to-b from-grad-light to-grad-dark rounded-2xl p-4">
-    <h2 className="text-text-green text-sm font-MonoReg">Total Savings</h2>
+    <h2 className="text-text-green text-sm font-MonoReg">Total Savings Per Day</h2>
     {/* Savings content */}
-    <div className="bg-white mt-2 from-grad-light via-grad-light to-grad-dark rounded-2xl p-4 h-16"></div>
-  </div>
+    <div className="bg-white mt-2 rounded-2xl p-4 flex justify-between items-center">
+        <div className="flex items-center">
+        <Image src={bottle} alt="Bottle" width={24} height={24} className="mr-2" />
+        <div>
+            <div className="text-text-green text-xs font-MonoReg font-bold">1,000,000</div>
+            <div className="text-text-green text-xs font-MonoReg">bottles saved</div>
+          </div>
+        </div>
+        
+        <div className="flex items-center">
+        <Image src={electricity} alt="Electricity" width={24} height={24} className="mr-2" />
+          <div>
+            <div className="text-text-green text-xs font-bold font-MonoReg">29,000</div>
+            <div className="text-text-green text-xs font-MonoReg">kWH saved</div>
+          </div>
+        </div>
+        
+        <div className="flex items-center">
+        <Image src={co2} alt="Co2" width={30} height={30} className="mr-2" />
+          <div>
+            <div className="text-text-green text-xs font-bold font-MonoReg">10-50</div>
+            <div className="text-text-green text-xs font-MonoReg">metric tons</div>
+          </div>
+        </div>
+        
+        <div className="flex items-center">
+        <Image src={phone} alt="Phone" width={22} height={22} className="mr-2" />
+          <div>
+            <div className="text-text-green text-xs font-bold font-MonoReg">2,500,000</div>
+            <div className="text-text-green text-xs font-MonoReg">phones charged</div>
+          </div>
+        </div>
+      </div> 
+     </div>
 </div>
 
 <div className="mt-4 flex items-center">
