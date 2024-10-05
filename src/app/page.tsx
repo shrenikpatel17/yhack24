@@ -2,6 +2,9 @@
 
 import { useState } from 'react';
 import OpenAI from 'openai';
+import React from 'react';
+import { LeafyGreen, Globe } from 'lucide-react';
+import sustainllmicon from '../app/image/sustainllmicon.png'
 
 const openaiApiKey = "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"
 
