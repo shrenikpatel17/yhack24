@@ -95,7 +95,7 @@ export default function Home() {
     }
     function calcBottle(characterCount: number): string {
       // Calculate the amount of water used in mL
-      const mlPerCharacter: number = 100 / 150; // 100 mL for 150 characters
+      const mlPerCharacter: number = (100 / 150)*(14/15); // 100 mL for 150 characters
       const totalML: number = characterCount * mlPerCharacter;
   
       // Convert to liters if totalML exceeds 1000 mL
@@ -107,7 +107,7 @@ export default function Home() {
   }  
 
   function calcElectricity(characterCount: number): string {
-    const wattsPerCharacter: number = 2.9 / 150; // 2.9 watts for 150 characters
+    const wattsPerCharacter: number = (2.9 / 150)*(14/15); // 2.9 watts for 150 characters
     const totalWatts: number = characterCount * wattsPerCharacter;
 
     // Convert to kilowatts if total exceeds 1000 watts
@@ -120,7 +120,7 @@ export default function Home() {
 }
 
   function calculateCO2Usage(characterCount: number): string {
-    const gramsPerCharacter: number = 2.5 / 150; // 2.5 grams for 150 characters
+    const gramsPerCharacter: number = (2.5 / 150)*(14/15); // 2.5 grams for 150 characters
     const totalGrams: number = characterCount * gramsPerCharacter;
 
     // Convert to kilograms if total exceeds 1000 grams
@@ -133,7 +133,7 @@ export default function Home() {
 }
 
   function calcPhonesCharged(characterCount: number): string {
-    const phonesChargedPerCharacter: number = 0.25 / 150; // 0.25 phones charged for 150 characters
+    const phonesChargedPerCharacter: number = (0.25 / 150)*(14/15); // 0.25 phones charged for 150 characters
     const totalPhonesCharged: number = characterCount * phonesChargedPerCharacter;
 
     return `${totalPhonesCharged.toFixed(4)} phones charged`;
