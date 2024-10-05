@@ -20,6 +20,7 @@ const config: Config = {
         'text-green': '#044723',
         'icon-color': '#547A51',
         'bg-color': '#FEFFFC',
+        'hover-light':'#f2f9f0',
       },
     },
   },
