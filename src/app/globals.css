@@ -13,10 +13,18 @@
     --foreground: #ededed;
   }
 }
+@font-face {
+  font-family: "MonoSemiBold";
+  src: url("../app/fonts/JetBrainsMono-2.304/fonts/webfonts/JetBrainsMono-SemiBold.woff2");
+}
+@font-face {
+  font-family: "MonoReg";
+  src: url("../app/fonts/JetBrainsMono-2.304/fonts/webfonts/JetBrainsMono-Regular.woff2");
+}
 
 body {
-  color: var(--foreground);
-  background: var(--background);
+  color: white;
+  background: "text-dark";
   font-family: Arial, Helvetica, sans-serif;
 }
 

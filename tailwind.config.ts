@@ -8,9 +8,18 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        MonoSemiBold: ["MonoSemiBold"],
+        MonoReg: ["MonoReg"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        'grad-light': '#F1F6F0',
+        'grad-dark' : '#C1D1BE',
+        'text-green': '#044723',
+        'icon-color': '#547A51',
+        'bg-color': '#FEFFFC',
       },
     },
   },
