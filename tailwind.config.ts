@@ -18,6 +18,7 @@ const config: Config = {
         'grad-light': '#F1F6F0',
         'grad-dark' : '#C1D1BE',
         'text-green': '#044723',
+        'hover-dark-green':'#003318',
         'icon-color': '#547A51',
         'bg-color': '#FEFFFC',
         'hover-light':'#f2f9f0',
