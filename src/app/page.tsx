@@ -49,7 +49,7 @@ const SustainLLM = () => {
         <div className="bg-gradient-to-b from-grad-light to-grad-dark rounded-2xl p-4">
           <h2 className="text-text-green text-sm font-MonoReg">Sustainability Metrics</h2>
           {/* Metrics content */}
-          <div className="bg-white mt-2 from-grad-light via-grad-light to-grad-dark rounded-xl p-4 h-16"></div>
+          <div className="bg-white mt-2 from-grad-light via-grad-light to-grad-dark rounded-2xl p-4 h-16"></div>
         </div>
         
         <div className="bg-gradient-to-b from-grad-light to-grad-dark rounded-2xl p-4">
@@ -65,7 +65,7 @@ const SustainLLM = () => {
     className="text-text-green text-sm font-MonoReg w-full p-3 rounded-full border border-icon-color focus:outline-none focus:ring-2 focus:text-green" // Keep the input taller
     placeholder="Message SustainLLM"
   />
-  <button className="ml-2 bg-text-green text-white font-MonoReg px-8 py-2 rounded-full">
+  <button className="ml-2 bg-text-green text-white font-MonoReg px-8 py-2 rounded-full hover:bg-icon-color">
     Send
   </button>
 </div>
