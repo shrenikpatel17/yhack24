@@ -335,7 +335,7 @@ function calcPhonesCharged(characterCount: number): string {
   </div>
   
   <div className="bg-gradient-to-b from-grad-light to-grad-dark rounded-2xl p-4">
-      <h2 className="text-text-green text-sm font-MonoReg">Sustainability Metrics</h2>
+      <h2 className="text-text-green text-sm font-MonoReg">Your query saved...</h2>
       <div className="bg-white mt-2 rounded-2xl p-4 flex justify-between items-center">
         <div className="flex items-center">
         <Image src={bottle} alt="Bottle" width={24} height={24} className="mr-2" />
@@ -372,7 +372,7 @@ function calcPhonesCharged(characterCount: number): string {
     </div>
   
   <div className="bg-gradient-to-b from-grad-light to-grad-dark rounded-2xl p-4">
-    <h2 className="text-text-green text-sm font-MonoReg">Total Savings Per Day</h2>
+    <h2 className="text-text-green text-sm font-MonoReg">Daily Projected Savings</h2>
     {/* Savings content */}
     <div className="bg-white mt-2 rounded-2xl p-4 flex justify-between items-center">
         <div className="flex items-center">
