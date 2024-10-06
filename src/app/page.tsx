@@ -139,7 +139,7 @@ export default function Home() {
   const getCharacterCount = () => {
     var charLength = 0;
     if (answer && results) {
-      charLength = results.reduce((total, result) => total + (result.metadata?.answer?.length || 0), 0)
+      charLength = results.reduce((total, result) => total + (result.metadata?.answer?.length || 0), 0) - answer.length
     }
     if (results && !answer) {
       charLength = results.reduce((total, result) => total + (result.metadata?.answer?.length || 0), 0)
@@ -155,48 +155,50 @@ export default function Home() {
 
   function calcBottle(characterCount: number): string {
     // Calculate the amount of water used in mL
-    const mlPerCharacter: number = (100 / 150)*(14/15); // 100 mL for 150 characters
+    const mlPerCharacter: number = (50 / 500)*(14/15) / 500; // 50 mL for 500 characters
+    
     const totalML: number = characterCount * mlPerCharacter;
 
     // Convert to liters if totalML exceeds 1000 mL
-    if (totalML >= 1000) {
-        const totalLiters: number = totalML / 1000;
-        return `${totalLiters.toFixed(2)} L Saved`;
-    }
-    return `${totalML.toFixed(2)} mL Saved`;
+    // if (totalML >= 1000) {
+    //     const totalLiters: number = totalML / 1000;
+    //     return `${totalLiters.toFixed(2)} L Saved`;
+    // }
+
+    return `${totalML.toFixed(2)}`;
 }  
 
 function calcElectricity(characterCount: number): string {
-  const wattsPerCharacter: number = (2.9 / 150)*(14/15); // 2.9 watts for 150 characters
+  const wattsPerCharacter: number = (2.9 / 500)*(14/15); // 2.9 watts for 500 characters
   const totalWatts: number = characterCount * wattsPerCharacter;
 
   // Convert to kilowatts if total exceeds 1000 watts
-  if (totalWatts > 1000) {
-      const totalKilowatts = totalWatts / 1000;
-      return `${totalKilowatts.toFixed(2)} kW Saved`;
-  }
+  // if (totalWatts > 1000) {
+  //     const totalKilowatts = totalWatts / 1000;
+  //     return `${totalKilowatts.toFixed(2)} kW Saved`;
+  // }
 
-  return `${totalWatts.toFixed(2)} Watts Saved`;
+  return `${totalWatts.toFixed(2)}`;
 }
 
 function calculateCO2Usage(characterCount: number): string {
-  const gramsPerCharacter: number = (2.5 / 150)*(14/15); // 2.5 grams for 150 characters
+  const gramsPerCharacter: number = (2.5 / 500)*(14/15); // 2.5 grams for 500 characters
   const totalGrams: number = characterCount * gramsPerCharacter;
 
   // Convert to kilograms if total exceeds 1000 grams
-  if (totalGrams > 1000) {
-      const totalKilograms = totalGrams / 1000;
-      return `${totalKilograms.toFixed(2)} Kg Saved`;
-  }
+  // if (totalGrams > 1000) {
+  //     const totalKilograms = totalGrams / 1000;
+  //     return `${totalKilograms.toFixed(2)} Kg Saved`;
+  // }
 
-  return `${totalGrams.toFixed(2)} Grams Saved`;
+  return `${totalGrams.toFixed(2)}`;
 }
 
 function calcPhonesCharged(characterCount: number): string {
-  const phonesChargedPerCharacter: number = (0.25 / 150)*(14/15); // 0.25 phones charged for 150 characters
+  const phonesChargedPerCharacter: number = (0.17 / 500)*(14/15); // 0.25 phones charged for 500 characters
   const totalPhonesCharged: number = characterCount * phonesChargedPerCharacter;
 
-  return `${totalPhonesCharged.toFixed(4)} phones charged`;
+  return `${totalPhonesCharged.toFixed(2)}`;
 }
 
   return (
@@ -232,7 +234,7 @@ function calcPhonesCharged(characterCount: number): string {
     </header>
 
     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div className="bg-gradient-to-b from-grad-light via-grad-light to-grad-dark rounded-2xl p-4">
+    <div className="bg-gradient-to-b from-grad-light via-grad-light to-grad-dark rounded-2xl p-4 h-[60vh]">
     {question && 
     <>
       <h2 className="text-text-green text-sm font-MonoReg">Question</h2>
@@ -241,7 +243,7 @@ function calcPhonesCharged(characterCount: number): string {
       </div>
       </>}
     <h2 className="text-text-green text-sm font-MonoReg">Response</h2>
-    <div className='max-h-full overflow-y-auto'>
+    <div className='max-h-80 overflow-y-auto'>
     {isLoading ? (
       <p className="text-center text-text-green text-sm font-MonoReg">Processing your question...</p>
 
@@ -293,12 +295,12 @@ function calcPhonesCharged(characterCount: number): string {
       </div>
       </div>
       
-      <div className="bg-gradient-to-b from-grad-light via-grad-light to-grad-dark rounded-2xl px-4 pt-4 h-96">
+      <div className="bg-gradient-to-b from-grad-light via-grad-light to-grad-dark rounded-2xl px-4 pt-4 h-84">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-text-green text-sm font-MonoReg">Query Vector Visualization</h2>
           <Globe className="text-icon-color" />
         </div>
-        <div className='p-4 max-h-96 overflow-y-auto'>
+        <div className='p-4 max-h-80 overflow-y-auto'>
 
         {isLoading ? (
       <p className="text-center text-text-green text-sm font-MonoReg">Searching vectors...</p>
@@ -340,31 +342,37 @@ function calcPhonesCharged(characterCount: number): string {
         <div className="flex items-center">
         <Image src={bottle} alt="Bottle" width={24} height={24} className="mr-2" />
         <div>
-            <div className="text-text-green text-xs font-MonoReg font-bold">0.9</div>
+            <div className="text-text-green text-xs font-MonoReg font-bold">{calcBottle(getCharacterCount())}</div>
             <div className="text-text-green text-xs font-MonoReg">bottles saved</div>
           </div>
         </div>
+
+        <p className='text-icon-color text-xs font-MonoReg'>or</p>
         
         <div className="flex items-center">
         <Image src={electricity} alt="Electricity" width={24} height={24} className="mr-2" />
           <div>
-            <div className="text-text-green text-xs font-bold font-MonoReg">12</div>
-            <div className="text-text-green text-xs font-MonoReg">kWH saved</div>
+            <div className="text-text-green text-xs font-bold font-MonoReg">{calcElectricity(getCharacterCount())}</div>
+            <div className="text-text-green text-xs font-MonoReg">WH saved</div>
           </div>
         </div>
+
+        <p className='text-icon-color text-xs font-MonoReg'>or</p>
         
         <div className="flex items-center">
         <Image src={co2} alt="Co2" width={30} height={30} className="mr-2" />
           <div>
-            <div className="text-text-green text-xs font-bold font-MonoReg">1-5</div>
+            <div className="text-text-green text-xs font-bold font-MonoReg">{calculateCO2Usage(getCharacterCount())}</div>
             <div className="text-text-green text-xs font-MonoReg">grams</div>
           </div>
         </div>
+
+        <p className='text-icon-color text-xs font-MonoReg'>or</p>
         
         <div className="flex items-center">
         <Image src={phone} alt="Phone" width={22} height={22} className="mr-2" />
           <div>
-            <div className="text-text-green text-xs font-bold font-MonoReg">1.5</div>
+            <div className="text-text-green text-xs font-bold font-MonoReg">{calcPhonesCharged(getCharacterCount())}</div>
             <div className="text-text-green text-xs font-MonoReg">phones charged</div>
           </div>
         </div>
@@ -382,6 +390,8 @@ function calcPhonesCharged(characterCount: number): string {
             <div className="text-text-green text-xs font-MonoReg">bottles saved</div>
           </div>
         </div>
+
+        <p className='text-icon-color text-xs font-MonoReg'>or</p>
         
         <div className="flex items-center">
         <Image src={electricity} alt="Electricity" width={24} height={24} className="mr-2" />
@@ -390,6 +400,8 @@ function calcPhonesCharged(characterCount: number): string {
             <div className="text-text-green text-xs font-MonoReg">kWH saved</div>
           </div>
         </div>
+
+        <p className='text-icon-color text-xs font-MonoReg'>or</p>
         
         <div className="flex items-center">
         <Image src={co2} alt="Co2" width={30} height={30} className="mr-2" />
@@ -398,6 +410,8 @@ function calcPhonesCharged(characterCount: number): string {
             <div className="text-text-green text-xs font-MonoReg">metric tons</div>
           </div>
         </div>
+
+        <p className='text-icon-color text-xs font-MonoReg'>or</p>
         
         <div className="flex items-center">
         <Image src={phone} alt="Phone" width={22} height={22} className="mr-2" />
