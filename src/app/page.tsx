@@ -254,6 +254,7 @@ function calcPhonesCharged(characterCount: number): string {
             <div key={idx} className="p-2 rounded">
               {result.metadata && (
                 <>
+                <p className='text-text-green text-xs font-MonoReg'><strong>Response to {idx+1}</strong></p>
                   <p className='text-text-green text-xs font-MonoReg'>{result.metadata.answer}</p>
                 </>
               )}
