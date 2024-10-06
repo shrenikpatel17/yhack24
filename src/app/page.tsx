@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from 'react';
-import OpenAI from 'openai';
+// import OpenAI from 'openai';
 import React from 'react';
 import { Globe } from 'lucide-react';
 import sustainllmicon from '../app/image/sustainllmicon.png'
@@ -46,9 +46,16 @@ async function getGPTResponse(prompt: string) {
   return gptResponse; // Assuming API returns the GPT content directly
 }
 
+interface SearchResultItem {
+  score: number,
+  metadata?: {
+    answer: string;
+    question: string;
+  };
+}
 export default function Home() {
   const [question, setQuestion] = useState('');
-  const [results, setResults] = useState<any[]>([]);
+  const [results, setResults] = useState<SearchResultItem[]>([]);
   const [answer, setAnswer] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
@@ -146,7 +153,7 @@ export default function Home() {
   };
 
   const getCharacterCount = () => {
-    var charLength = 0;
+    let charLength = 0;
     if (answer && results) {
       charLength = results.reduce((total, result) => total + (result.metadata?.answer?.length || 0), 0) - answer.length
     }
@@ -264,7 +271,7 @@ function calcPhonesCharged(characterCount: number): string {
               {result.metadata && (
                 <>
                 <p className='text-text-green text-xs font-MonoReg'><strong>Response to {idx+1}</strong></p>
-                  <p className='text-text-green text-xs font-MonoReg'>{result.metadata.answer}</p>
+                  <p className='text-text-green text-xs font-MonoReg'>{result.metadata?.answer}</p>
                 </>
               )}
               
@@ -326,7 +333,7 @@ function calcPhonesCharged(characterCount: number): string {
                 {result.metadata && (
                   <>
                     <p className="text-text-green text-xs font-MonoReg">
-                      <strong>Question:</strong> {result.metadata.question}
+                      <strong>Question:</strong> {result.metadata?.question}
                     </p>
                     <p className="text-text-green text-xs font-MonoReg">
                       <strong>Similarity:</strong> {result.score?.toFixed(4)}
