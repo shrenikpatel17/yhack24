@@ -2,7 +2,7 @@ import { Pinecone } from '@pinecone-database/pinecone';
 import { NextRequest, NextResponse } from 'next/server';
 
 const pc = new Pinecone({
-  apiKey: 'ffb47360-de2b-428b-aec3-615eabd8b22f',
+  apiKey: process.env.PINECONE_API_KEY ?? "",
 });
 
 const indexName = 'quickstart';
