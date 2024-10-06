@@ -11,30 +11,39 @@ import co2 from '../app/image/co2.png'
 import phone from '../app/image/phone.png'
 import Image from 'next/image';
 
-const openaiApiKey = "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"
-
-const openai = new OpenAI({
-  apiKey: openaiApiKey,
-  dangerouslyAllowBrowser: true,
-});
 
 async function getEmbedding(input: string) {
-  const embeddingResponse = await openai.embeddings.create({
-    model: 'text-embedding-ada-002',
-    input,
-    encoding_format: 'float',
+  const response = await fetch('/api/getEmbedding', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ input }),
   });
 
-  return embeddingResponse.data[0].embedding;
+  if (!response.ok) {
+    throw new Error('Failed to fetch embedding');
+  }
+
+  const embedding = await response.json();
+  return embedding; // Assuming API returns embedding directly
 }
 
 async function getGPTResponse(prompt: string) {
-  const completion = await openai.chat.completions.create({
-    model: "gpt-3.5-turbo",
-    messages: [{ role: "user", content: prompt }],
+  const response = await fetch('/api/getResponse', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ prompt }),
   });
 
-  return completion.choices[0].message.content;
+  if (!response.ok) {
+    throw new Error('Failed to fetch GPT response');
+  }
+
+  const gptResponse = await response.json();
+  return gptResponse; // Assuming API returns the GPT content directly
 }
 
 export default function Home() {
