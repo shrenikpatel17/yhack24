@@ -132,6 +132,23 @@ export default function Home() {
     }
   };
 
+  const getCharacterCount = () => {
+    var charLength = 0;
+    if (answer && results) {
+      charLength = results.reduce((total, result) => total + (result.metadata?.answer?.length || 0), 0)
+    }
+    if (results && !answer) {
+      charLength = results.reduce((total, result) => total + (result.metadata?.answer?.length || 0), 0)
+    }
+    if (answer && !results){
+      charLength = 0;
+    }
+
+    return charLength;
+  };
+  
+  console.log("Count: ", getCharacterCount())
+
   return (
     <>
     <div className="bg-text-dark min-h-screen p-4">
@@ -268,13 +285,13 @@ export default function Home() {
       </div>
       
       <div className="bg-gradient-to-b from-grad-light to-grad-dark rounded-2xl p-4">
-        <h2 className="text-text-green text-sm font-MonoReg">Sustainability Metrics</h2>
+        <h2 className="text-text-green text-sm font-MonoReg">What your query saved...</h2>
         {/* Metrics content */}
         <div className="bg-white mt-2 from-grad-light via-grad-light to-grad-dark rounded-2xl p-4 h-16"></div>
       </div>
       
       <div className="bg-gradient-to-b from-grad-light to-grad-dark rounded-2xl p-4">
-        <h2 className="text-text-green text-sm font-MonoReg">Total Savings</h2>
+        <h2 className="text-text-green text-sm font-MonoReg">Daily Projected Savings</h2>
         {/* Savings content */}
         <div className="bg-white mt-2 from-grad-light via-grad-light to-grad-dark rounded-2xl p-4 h-16"></div>
       </div>
