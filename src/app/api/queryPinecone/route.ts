@@ -31,6 +31,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json(filteredResults);
   } catch (error) {
+    console.log(error)
     console.error('Error querying Pinecone:', error);
     return NextResponse.json({ error: 'Error querying Pinecone', details: error }, { status: 500 });
   }
