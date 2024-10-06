@@ -243,7 +243,7 @@ function calcPhonesCharged(characterCount: number): string {
       </div>
       </>}
     <h2 className="text-text-green text-sm font-MonoReg">Response</h2>
-    <div className='max-h-80 overflow-y-auto'>
+    <div className='max-h-[40vh] overflow-y-auto'>
     {isLoading ? (
       <p className="text-center text-text-green text-sm font-MonoReg">Processing your question...</p>
 
